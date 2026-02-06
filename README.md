@@ -26,6 +26,7 @@ The solution follows IDesign's layered architecture pattern:
 
 - .NET 8 SDK
 - SQL Server LocalDB (or SQL Server)
+- Node.js 18+ and npm (for frontend)
 
 ## Getting Started
 
@@ -48,6 +49,29 @@ The solution follows IDesign's layered architecture pattern:
 
 4. **Access Swagger UI:**
    - Navigate to `https://localhost:5001/swagger` (or the port shown in console)
+
+## Running the Frontend
+
+1. **Navigate to the frontend directory:**
+   ```bash
+   cd Abstra.Frontend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the application:**
+   - The frontend will be available at `http://localhost:5173`
+   - Make sure the API is running on `https://localhost:7246` (or update the API URL in `src/utils/constants.ts`)
+
+**Note:** The frontend is configured to connect to the API at `https://localhost:7246/api` by default. If your API runs on a different port, update the `API_BASE_URL` constant in `Abstra.Frontend/src/utils/constants.ts` file.
 
 ## API Endpoints
 
@@ -125,14 +149,24 @@ Abstra/
 │   ├── Middleware/          # Custom middleware
 │   └── Program.cs           # Application startup
 ├── Abstra.Application/       # Application layer
-│   └── Services/            # Business services
+│   ├── Services/            # Business services
+│   └── Handlers/            # MediatR handlers
 ├── Abstra.Repository/       # Data access layer
 │   ├── Data/                # DbContext
 │   └── Repositories/        # Repository implementations
 ├── Abstra.Domain/           # Domain layer
 │   ├── Entities/            # Domain entities
 │   ├── DTOs/                # Data transfer objects
-│   └── Contracts/           # Interfaces
+│   ├── Contracts/           # Interfaces
+│   ├── Commands/            # CQRS Commands
+│   └── Queries/             # CQRS Queries
+├── Abstra.Frontend/         # React frontend application
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   ├── pages/          # Page components
+│   │   ├── services/       # API services
+│   │   └── contexts/       # Context providers
+│   └── package.json
 └── Abstra.Tests/            # Test project
     ├── Unit/                # Unit tests
     ├── Integration/         # Integration tests
@@ -141,13 +175,23 @@ Abstra/
 
 ## Technologies Used
 
+### Backend
 - .NET 8
 - ASP.NET Core Web API
 - Entity Framework Core 8
 - SQL Server LocalDB
 - JWT Authentication
+- MediatR (CQRS pattern)
 - xUnit, Moq, FluentAssertions
 - Swagger/OpenAPI
+
+### Frontend
+- React 18 with TypeScript
+- Vite
+- Material-UI (MUI)
+- React Router v6
+- Axios
+- Context API
 
 ## Data Model
 
